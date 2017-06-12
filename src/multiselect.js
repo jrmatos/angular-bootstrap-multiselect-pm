@@ -124,7 +124,12 @@
                         if (totalSelected === 0) {
                             return $scope.labels && $scope.labels.select ? $scope.labels.select : ($scope.placeholder || 'Select');
                         } else {
-                            return totalSelected + ' ' + ($scope.labels && $scope.labels.itemsSelected ? $scope.labels.itemsSelected : 'selected');
+                            try{
+                                return $filter('trueList')($scope.selectedOptions, $scope.displayProp);
+                            }
+                            catch(e) {
+                                return totalSelected + ' ' + ($scope.labels && $scope.labels.itemsSelected ? $scope.labels.itemsSelected : 'selected');
+                            }
                         }
                     } else {
                         return $scope.labels && $scope.labels.select ? $scope.labels.select : ($scope.placeholder || 'Select');
